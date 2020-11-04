@@ -46,7 +46,7 @@ namespace Paerody.ShoveVoleOut
             }
         }
 
-        // Make Vole Pup/Vole Egg Care Packages require that Vole Pups/Vole Eggs be discovered first
+        // Make Vole Pup/Vole Egg Care Packages require that Vole Eggs be discovered first
         [HarmonyPatch(typeof(Immigration))]
         [HarmonyPatch("ConfigureCarePackages")]
         public class Immigration_ConfigureCarePackages_Patch
@@ -64,7 +64,7 @@ namespace Paerody.ShoveVoleOut
                 {
                     if(___carePackages[i].id == "MoleBaby")
                     {
-                        ___carePackages[i] = new CarePackageInfo("MoleBaby", 1f, () => WorldInventory.Instance.IsDiscovered("MoleBaby"));
+                        ___carePackages[i] = new CarePackageInfo("MoleBaby", 1f, () => WorldInventory.Instance.IsDiscovered("MoleEgg"));
                         Debug.Log("[Paerody] - Updated Vole Pup care package requirements.");
                     }
                     else if(___carePackages[i].id == "MoleEgg")
@@ -81,6 +81,11 @@ namespace Paerody.ShoveVoleOut
         //[HarmonyPatch("OnSpawn")]
         //public class WorldInventory_OnSpawn_Patch
         //{
+        //    public static void Prefix()
+        //    {
+        //        Debug.Log("[Paerody] - Vole Pups discovered?: " + WorldInventory.Instance.IsDiscovered("MoleBaby"));
+        //        Debug.Log("[Paerody] - Vole Eggs discovered?: " + WorldInventory.Instance.IsDiscovered("MoleEgg"));
+        //    }
         //    public static void Postfix()
         //    {
         //        Debug.Log("[Paerody] - Vole Pups discovered?: " + WorldInventory.Instance.IsDiscovered("MoleBaby"));
